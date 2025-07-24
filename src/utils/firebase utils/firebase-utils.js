@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
@@ -29,14 +30,22 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
+// google popup signin
 export const signinWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
+
+// google redirect signin
+// export const signinWithGoogleRedirect = () =>
+//   signInWithRedirect(auth, googleProvider);
 
 // database with fireStore //
 const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocRef = doc(db, "users", userAuth.uid);
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation
+) => {
+  const userDocRef = doc(db, "emailUsers", userAuth.uid);
 
   const userSnapShot = await getDoc(userDocRef);
 
@@ -50,12 +59,49 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (err) {
-      console.log("error catching the user"+ err.message);
+      console.log("error catching the user" + err.message);
     }
-
   }
   // if user exsist
   return userDocRef;
+};
+
+
+
+
+
+// signup using email and password
+export const createAuthUserWithEmailAndPassword = async (
+  email,
+  password,
+  displayName
+) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+
+  // createUserDocumentFromAuth(response);
+
+  // const userDocRef = doc(db, "emailUsers", response.user.uid);
+
+  // const userSnapShot = await getDoc(userDocRef);
+  // console.log(userSnapShot.exists());
+
+  // // if not exists
+  // try {
+  //   if (!userSnapShot.exists()) {
+  //     await setDoc(userDocRef, {
+  //       displayName: displayName,
+  //       email: email,
+  //       password: password,
+  //     });
+  //   }
+  // } catch (err) {
+  //   console.log("error catching the user" + err.message);
+  // }
+
+  // return userDocRef;
 };
