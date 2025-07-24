@@ -83,7 +83,7 @@ function SignupForm() {
           required
         />
 
-        <Button buttonType='google' type="submit" >submit button</Button>
+        <Button type="submit" >submit button</Button>
       </form>
     </div>
   );

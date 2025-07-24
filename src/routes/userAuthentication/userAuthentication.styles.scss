@@ -1,0 +1,15 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1 {
+        margin-bottom: 52px;
+    }
+    .forms {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        width: 70%;
+    }
+}
