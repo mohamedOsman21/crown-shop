@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -14,19 +15,25 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
+
 function SignupForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  //user context
+
+//----------------------------- input fields change handling -----------------------------
   function handleChange(event) {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   }
 
+//----------------------------- clean input fields after signUp -----------------------------
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
+//----------------------------- sign Up user handling -----------------------------
   async function handleSubmit(event) {
     if (password != confirmPassword) {
       alert("password didn't match!!, try again");

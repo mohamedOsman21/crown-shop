@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState} from "react";
 import Button from "../buttons/Button.component";
 import FormInput from "../formInput/FormInput.component";
 
-import { signInAuthUserWithEmailAndPassword } from "../../utils/firebase utils/firebase-utils";
+import { createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, signinWithGooglePopup } from "../../utils/firebase utils/firebase-utils";
 import "./signin-form.styles.scss";
 import googleSvg from '../../assets/web_light_rd_na.svg'
 
@@ -15,24 +15,36 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+
+  //----------------------------- input change handling -----------------------------
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
+  //----------------------------- clean input fields after signUp -----------------------------
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  //----------------------------- submit hangling -----------------------------
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await signInAuthUserWithEmailAndPassword(email, password);
+      const {user} = await signInAuthUserWithEmailAndPassword(email, password);
     } catch (err) {
       console.log("this user is not exists!!", err.message);
     }
+    resetFormFields();
   };
 
+  //----------------------------- sign in user with google -----------------------------
   const logGoogleUser = async () => {
     const { user } = await signinWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    // await createUserDocumentFromAuth(user);
   };
+
+
 
   return (
     <div className="signin-form-container">
@@ -59,7 +71,7 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button buttonType="google" onClick={logGoogleUser} type="submit">
+          <Button buttonType="google" onClick={logGoogleUser} >
             signIn with google <img src={googleSvg} alt="google" />
           </Button>
         </div>
