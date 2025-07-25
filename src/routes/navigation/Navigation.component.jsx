@@ -4,12 +4,16 @@ import CrwnLogo from "../../assets/crown.svg";
 import "./navigation.styles.scss";
 
 import { UserContext } from "../../context/userContext";
+import { CartDropDownContext } from "../../context/cartDropDownContext";
+
 import { signOutUser } from "../../utils/firebase utils/firebase-utils";
+import ShoppingIcon from "./../../Components/shppingIcon/ShoppingIcon.component";
+import CartDropDown from "../../Components/cartDropDown/CartDropDown.component";
 
 function Navigation() {
   // context
   const { currentUser } = useContext(UserContext);
-
+  const {isCartOpen} = useContext(CartDropDownContext)
 
   return (
     <Fragment>
@@ -23,13 +27,17 @@ function Navigation() {
           </Link>
 
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>sign out</span>
+            <span className="nav-link" onClick={signOutUser}>
+              sign out
+            </span>
           ) : (
             <Link to="/auth" className="nav-link">
               sign in
             </Link>
           )}
+          <ShoppingIcon />
         </div>
+        {isCartOpen && <CartDropDown />}
       </div>
       <Outlet />
     </Fragment>

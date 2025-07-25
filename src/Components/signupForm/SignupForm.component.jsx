@@ -55,7 +55,7 @@ function SignupForm() {
       <span>sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="display name: "
+          label="display name "
           type="text"
           name="displayName"
           value={displayName}
@@ -64,7 +64,7 @@ function SignupForm() {
         />
 
         <FormInput
-          label="email: "
+          label="email "
           type="email"
           name="email"
           value={email}
@@ -73,7 +73,7 @@ function SignupForm() {
         />
 
         <FormInput
-          label="password: "
+          label="password "
           type="password"
           name="password"
           value={password}
@@ -82,7 +82,7 @@ function SignupForm() {
         />
 
         <FormInput
-          label="confirm password: "
+          label="confirm password "
           type="password"
           name="confirmPassword"
           value={confirmPassword}

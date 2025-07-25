@@ -53,7 +53,7 @@ const SignInForm = () => {
 
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="email: "
+          label="email "
           type="email"
           name="email"
           value={email}
@@ -62,7 +62,7 @@ const SignInForm = () => {
         />
 
         <FormInput
-          label="password: "
+          label="password "
           type="password"
           name="password"
           value={password}
