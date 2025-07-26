@@ -11,7 +11,7 @@ import {
   onAuthStateChanged
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, getDocs, query } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -43,6 +43,39 @@ export const signinWithGooglePopup = () =>
 
 // database with fireStore //
 const db = getFirestore();
+
+// -------------------------- adding a collection from object-----------------------
+export const addCollectionFromObject = async (collectionKey, objectToAdd) => {
+  const collectionRef = collection(db, collectionKey );
+  const batch = writeBatch(db)
+
+  objectToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object)
+  })
+
+  batch.commit();
+  console.log('done')
+}
+
+// -------------------------- adding a collection from object-----------------------
+export const getCollectionFromObject = async () => {
+    const collectionRef = collection(db, 'categories')
+
+    const q = query(collectionRef);
+    const snapShot = await getDocs(q);
+
+    const categoriesMap = snapShot.docs.reduce((acc, docSnapShot) => {
+      const {title, items} = docSnapShot.data();
+      acc[title.toLowerCase()] = items
+      return acc;
+    }, {})
+
+    return(categoriesMap)
+}
+
+
+
 
 
 // ---------------------- creating the new user document in the collection of firebase ---------------------------

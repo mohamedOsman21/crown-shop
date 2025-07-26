@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import heartSvg from "../../assets/heart.svg";
 import { CartContext } from "../../context/CartContext";
 import "./chekcout.styles.scss";
 import CheckoutItem from "../../Components/checkout/checkoutItem.component";
@@ -20,9 +19,9 @@ const Checkout = () => {
 
 
   return (
-    <div className="checkout-page">
+    <div className="checkout-container">
       {/* the title descripe the cart below */}
-      <div className="titles-container">
+      <div className="checkout-header">
         <div className="header-block">
           <span>product</span>
         </div>
