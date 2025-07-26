@@ -3,21 +3,20 @@ import shoppingIconSvg from "../../assets/shopping-bag.svg";
 import "./shoppingIcon.styles.scss";
 
 import CartDropDown from "../cartDropDown/CartDropDown.component";
-import { CartDropDownContext } from "../../context/cartDropDownContext";
-
-
+import { CartContext } from "../../context/CartContext";
 
 const ShoppingIcon = () => {
-    const {setIsCartOpen, isCartOpen} = useContext(CartDropDownContext)
-    
-    const toggleCartDropDown = () => setIsCartOpen(!isCartOpen);
+  const { setIsCartOpen, isCartOpen, cartItemsCounter } =
+    useContext(CartContext);
 
-    return (
-    <div className={`cart-icon-container`}  onClick={toggleCartDropDown}>
-        <img src={shoppingIconSvg} className="shopping-icon" alt="shoppingIcon" />
-        <span className="item-count">0</span>
+  const toggleCartDropDown = () => setIsCartOpen(!isCartOpen);
+
+  return (
+    <div className={`cart-icon-container`} onClick={toggleCartDropDown}>
+      <img src={shoppingIconSvg} className="shopping-icon" alt="shoppingIcon" />
+      <span className="item-count">{cartItemsCounter}</span>
     </div>
-    );
+  );
 };
 
 export default ShoppingIcon;

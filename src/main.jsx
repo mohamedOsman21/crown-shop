@@ -7,21 +7,17 @@ import { UserProvider } from "./context/userContext.jsx";
 import "./index.css";
 import App from "./App.jsx";
 import { ProductsProvider } from "./context/productContext.jsx";
-import { CartDropDownProvider } from "./context/cartDropDownContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-
         <ProductsProvider>
-
-          <CartDropDownProvider>
+          <CartProvider>
             <App />
-          </CartDropDownProvider>
-          
+          </CartProvider>
         </ProductsProvider>
-
       </UserProvider>
     </BrowserRouter>
   </StrictMode>
