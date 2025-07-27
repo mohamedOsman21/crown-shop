@@ -15,8 +15,8 @@ function UserAuthentication() {
 
   return (
     <div className="auth-container">
+        <div className="welcome-header">Welcome</div>
       <div className="forms">
-        <span>Welcome</span>
         <SignInForm />
         <SignupForm />
         {/* <button onClick={logGoogleUser}>signIn with google</button> */}
