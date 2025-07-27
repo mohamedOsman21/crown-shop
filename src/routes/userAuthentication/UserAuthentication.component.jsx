@@ -15,7 +15,7 @@ function UserAuthentication() {
 
   return (
     <div className="auth-container">
-      <h1>Welcome</h1>
+      <span>Welcome</span>
       <div className="forms">
         <SignInForm />
         <SignupForm />
