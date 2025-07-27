@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import SignupForm from "../../Components/signupForm/signupForm.component";
+import SignupForm from "../../Components/signupForm/SignupForm.component";
 import {
   signinWithGooglePopup,
   createUserDocumentFromAuth,
