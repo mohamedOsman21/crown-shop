@@ -14,14 +14,14 @@ function UserAuthentication() {
   // };
 
   return (
-// <div className="auth-container">
+    <div className="auth-container">
       <div className="welcome-header">Welcome</div>
-    //   <div className="forms">
-    //     <SignInForm />
-    //     <SignupForm />
-    //     {/* <button onClick={logGoogleUser}>signIn with google</button> */}
-    //   </div>
-    // </div>
+      <div className="forms">
+        <SignInForm />
+        <SignupForm />
+        {/* <button onClick={logGoogleUser}>signIn with google</button> */}
+      </div>
+    </div>
   );
 }
 
