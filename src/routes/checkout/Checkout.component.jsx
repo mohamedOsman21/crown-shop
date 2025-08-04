@@ -2,12 +2,19 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import "./chekcout.styles.scss";
 import CheckoutItem from "../../Components/checkout/checkoutItem.component";
+import { useSelector } from "react-redux";
+import { selectCartItems, selectTotal } from "../../store/cart/cart.selector";
 
 
 
 const Checkout = () => {
-  const { cartItems, counterPlus, deleteItemButton, addToCart, deleteCartItem, cartTotal } =
-    useContext(CartContext);
+  // const { counterPlus, deleteItemButton, addToCart, deleteCartItem } =
+  //   useContext(CartContext);
+
+
+    const cartItems = useSelector(selectCartItems);
+    const cartTotal = useSelector(selectTotal);
+
 
     // calculate total
     const sumTotal = () => {
