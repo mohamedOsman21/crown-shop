@@ -1,36 +1,45 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../../Components/product-card/ProductCard.component";
-import { CategoriesMapContext } from './../../context/categoriesMapContext';
-import './category.styles.scss'
+import { CategoriesMapContext } from "./../../context/categoriesMapContext";
+import "./category.styles.scss";
 import { useSelector } from "react-redux";
-import { categoryMapSelector } from "../../store/categoriesMap/categoriesMap.selector";
-
-
-
+import {
+  categoryMapSelector,
+  selectIsLoading,
+} from "../../store/categoriesMap/categoriesMap.selector";
+import Spinner from "../../Components/spinner/spinner.component";
 
 const Category = () => {
-    const {category} = useParams();
-    // const {categoriesMap} = useContext(CategoriesMapContext)
+  const { category } = useParams();
+  // const {categoriesMap} = useContext(CategoriesMapContext)
 
-    const  categoriesMap = useSelector(categoryMapSelector);
+  const categoriesMap = useSelector(categoryMapSelector);
+  const categoriesIsLoading = useSelector(selectIsLoading);
 
-    const [products, setProducts] = useState(categoriesMap[category])
+  const [products, setProducts] = useState(categoriesMap[category]);
 
-    useEffect(() => {
-        setProducts(categoriesMap[category])
-    }, [categoriesMap, category])
+  useEffect(() => {
+    setProducts(categoriesMap[category]);
+  }, [categoriesMap, category]);
 
-    return(
-        <Fragment>
-            <div className="category-title">
-                <h2>{category.toUpperCase()}</h2>
-            </div>
-            <div className="category-container">
-                {products && products.map((product) =>  <ProductCard key={product.id} product={product} />)}
-            </div>
-        </Fragment>
-    )
-}
+  return (
+    <Fragment>
+      <div className="category-title">
+        <h2>{category.toUpperCase()}</h2>
+      </div>
+      {categoriesIsLoading ? (
+        <Spinner />
+      ) : (
+        <div className="category-container">
+          {products &&
+            products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+        </div>
+      )}
+    </Fragment>
+  );
+};
 
 export default Category;

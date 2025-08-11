@@ -7,6 +7,8 @@ import {
 import FormInput from "../formInput/FormInput.component";
 import './signupForm.styles.scss';
 import Button from "../buttons/Button.component";
+import { useDispatch } from "react-redux";
+import { signUpSuccess } from "../../store/user/user.action";
 
 const defaultFormFields = {
   displayName: "",
@@ -19,7 +21,7 @@ const defaultFormFields = {
 function SignupForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
+  const dispatch = useDispatch()
   //user context
 
 //----------------------------- input fields change handling -----------------------------
@@ -39,12 +41,14 @@ function SignupForm() {
       alert("password didn't match!!, try again");
     } else {
       event.preventDefault();
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password,
-        displayName
-      );
-      await createUserDocumentFromAuth(user, { displayName });
+      // const { user } = await createAuthUserWithEmailAndPassword(
+      //   email,
+      //   password,
+      //   displayName
+      // );
+      // await createUserDocumentFromAuth(user, { displayName });
+
+      dispatch(signUpSuccess(email, password, {displayName}))
       resetFormFields();
     }
   }

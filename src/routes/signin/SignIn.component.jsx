@@ -4,17 +4,23 @@ import {
   signinWithGooglePopup,
   createUserDocumentFromAuth,
 } from "../../utils/firebase utils/firebase-utils";
+import { useDispatch } from "react-redux";
+import { googleSignInStart } from "../../store/user/user.action";
 
 function SignIn() {
+  const dispatch = useDispatch();
+  
   const logGoogleUser = async () => {
-    const { user } = await signinWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    // const { user } = await signinWithGooglePopup();
+    // await createUserDocumentFromAuth(user);
+
+    dispatch(googleSignInStart());
   };
 
   return (
     <>
       <h1>this is from sign in</h1>
-      <button onClick={logGoogleUser}>signIn with google</button>
+      <button >signIn with google</button>
       <SignupForm />
     </>
   );

@@ -5,6 +5,9 @@ import FormInput from "../formInput/FormInput.component";
 import { createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, signinWithGooglePopup } from "../../utils/firebase utils/firebase-utils";
 import "./signin-form.styles.scss";
 import googleSvg from '../../assets/web_light_rd_na.svg'
+import { useDispatch } from "react-redux";
+import { emailSignInStart, googleSignInStart } from "../../store/user/user.action";
+import { USER_ACTION_TYPES } from "../../store/user/userActionTypes";
 
 const defaultFormFields = {
   email: "",
@@ -14,6 +17,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const dispatch = useDispatch();
 
 
   //----------------------------- input change handling -----------------------------
@@ -31,7 +35,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const {user} = await signInAuthUserWithEmailAndPassword(email, password);
+      dispatch(emailSignInStart(email, password))
     } catch (err) {
       console.log("this user is not exists!!", err.message);
     }
@@ -40,7 +44,9 @@ const SignInForm = () => {
 
   //----------------------------- sign in user with google -----------------------------
   const logGoogleUser = async () => {
-    const { user } = await signinWithGooglePopup();
+    // const { user } = await signinWithGooglePopup();
+    dispatch(googleSignInStart())
+    
     // await createUserDocumentFromAuth(user);
   };
 
