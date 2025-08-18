@@ -4,7 +4,7 @@ import "./chekcout.styles.scss";
 import CheckoutItem from "../../Components/checkout/checkoutItem.component";
 import { useSelector } from "react-redux";
 import { selectCartItems, selectTotal } from "../../store/cart/cart.selector";
-
+import PaymentForm from "../../Components/paymentForm/payment-form.component";
 
 
 const Checkout = () => {
@@ -14,6 +14,7 @@ const Checkout = () => {
 
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectTotal);
+    
 
 
     // calculate total
@@ -55,6 +56,8 @@ const Checkout = () => {
 
 
       <span className="total" onClick={sumTotal}>Total: ${cartTotal}</span>
+
+      <PaymentForm />
     </div>
   );
 };
