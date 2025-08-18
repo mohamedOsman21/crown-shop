@@ -8,7 +8,7 @@ import {
   categoryMapSelector,
   selectIsLoading,
 } from "../../store/categoriesMap/categoriesMap.selector";
-import Spinner from "../../Components/spinner/spinner.component";
+import Spinner from "../../components/spinner/spinner.component";
 
 const Category = () => {
   const { category } = useParams();
