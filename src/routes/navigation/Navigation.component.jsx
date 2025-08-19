@@ -8,7 +8,7 @@ import { CartContext } from "../../context/CartContext";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
 
-import ShoppingIcon from "./../../Components/shppingIcon/ShoppingIcon.component";
+import ShoppingIcon from "../../Components/shppingIcon/ShoppingIcon.component";
 import CartDropDown from "../../Components/cartDropDown/CartDropDown.component";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
